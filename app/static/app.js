@@ -253,4 +253,3 @@ Array.from(document.querySelectorAll('.tab')).forEach((tab) => {
 });
 
 document.getElementById('runBtn').addEventListener('click', () => submitJob({ demo: false }));
-document.getElementById('demoBtn').addEventListener('click', () => submitJob({ demo: true }));
