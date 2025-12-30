@@ -1,0 +1,60 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "AudioMixMentor Analysis Result",
+  "type": "object",
+  "required": ["job_id", "mode", "genre", "duration_sec", "summary", "scores", "recommendations", "metrics", "warnings"],
+  "properties": {
+    "job_id": {"type": "string"},
+    "mode": {"type": "string", "enum": ["vocal", "instrumental", "mix"]},
+    "genre": {"type": "string"},
+    "vocal_style": {"type": ["string", "null"]},
+    "duration_sec": {"type": "number"},
+    "summary": {"type": "string"},
+    "scores": {
+      "type": "object",
+      "properties": {
+        "loudness": {"type": "number"},
+        "spectral_balance": {"type": "number"},
+        "stereo": {"type": "number"},
+        "dynamics": {"type": "number"},
+        "noise": {"type": "number"}
+      },
+      "required": ["loudness", "spectral_balance", "stereo", "dynamics", "noise"]
+    },
+    "recommendations": {
+      "type": "object",
+      "properties": {
+        "recording": {"type": "array", "items": {"type": "string"}},
+        "mixing": {"type": "array", "items": {"type": "string"}}
+      },
+      "required": ["recording", "mixing"]
+    },
+    "metrics": {"type": "object"},
+    "warnings": {"type": "array", "items": {"type": "string"}},
+    "bpm_key": {
+      "type": "object",
+      "properties": {
+        "bpm": {"type": "number"},
+        "confidence": {"type": "number"},
+        "warning": {"type": ["string", "null"]},
+        "key": {"type": "string"},
+        "key_confidence": {"type": "number"},
+        "note": {"type": "string"}
+      }
+    },
+    "ab_compare": {
+      "type": "object",
+      "properties": {
+        "loudness_diff_lufs": {"type": "number"},
+        "short_term_diff_lufs": {"type": "number"},
+        "true_peak_diff_db": {"type": "number"},
+        "spectral_diff_summary": {"type": "string"},
+        "stereo_diff_summary": {"type": "string"},
+        "phase_corr_diff": {"type": "number"},
+        "dynamics_diff_summary": {"type": "string"},
+        "match_suggestions": {"type": "array", "items": {"type": "string"}}
+      }
+    },
+    "appendix": {"type": "object"}
+  }
+}

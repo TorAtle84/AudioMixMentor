@@ -1,0 +1,152 @@
+
+PROJECT: “MixMentor” – webapp som analyserer lydfiler (vokal / instrumental / mix) og gir tilbakemelding som en senior mix engineer.
+
+ROLE
+You are a senior full-stack architect + senior audio DSP engineer. Prioritize end-product quality and correctness over simplicity.
+
+CORE USER FLOW
+1) User opens web UI and chooses analysis type:
+   A) Vocal (isolated vocal file)
+   B) Instrumental (beat)
+   C) Mix (full stereo mix intended for mastering)
+2) User selects genre (mandatory). For Vocal also selects: Rap / Singing / Both.
+3) User uploads audio (wav preferred; accept aiff/flac; accept mp3 with warning).
+4) System runs analysis job and returns:
+   - Executive summary
+   - Scores (0–100) across categories
+   - Concrete, actionable fixes (recording + mixing), written like a senior engineer
+   - Technical appendix: measured metrics + plots (optional)
+
+NEW: MASTERING A/B FEATURE (MIX MODE)
+- User can upload an optional Reference Track (A/B) for mastering comparison.
+- Output must include:
+  - A/B loudness comparison (LUFS integrated + short-term)
+  - A/B true peak comparison
+  - A/B spectral balance difference summary
+  - A/B stereo/phase differences
+  - A/B dynamics/crest factor differences
+  - A “match suggestions” section (what to adjust to approach the reference, without copying)
+
+NEW: BPM AND KEY ESTIMATION
+- For Instrumental and Mix modes, estimate:
+  - BPM (tempo) with confidence score and optional “half/double-time” warning.
+  - Musical key (root + major/minor) with confidence score.
+- Present BPM/Key as “best guess”, not a guarantee.
+
+QUALITY REQUIREMENTS (NON-NEGOTIABLE)
+- Must compute loudness metrics (LUFS integrated, short-term) and true-peak (EBU R128).
+- Must detect clipping/distortion, noise floor, roominess, sibilance, plosives, and resonant harshness zones.
+- Must evaluate spectral balance, dynamic range/crest factor, stereo width and phase correlation.
+- Must output genre-aware recommendations (different targets and priorities per genre).
+- Must be robust for long files and large uploads; process asynchronously with job queue.
+
+STACK SELECTION RULE
+Choose the stack that gives best audio-analysis quality:
+- UI should be modern and fast.
+- Audio analysis must use the best available libraries even if it requires a separate service.
+Hybrid architecture is allowed and preferred if it improves quality.
+
+RECOMMENDED ARCHITECTURE (IF YOU AGREE)
+- Frontend/UI: Next.js (App Router) + TypeScript
+- Backend orchestration: Next.js API routes
+- Analysis service: Python 3.14 + FastAPI
+- Job queue: Redis + BullMQ (Node) OR Redis + Celery (Python) (pick best fit)
+- Storage: local filesystem in dev, S3-compatible in prod
+- Docker Compose for local; production-ready containers
+
+ANALYSIS ENGINE
+Implement these modules (with tests):
+1) Ingest: validate file, convert to standard format (48kHz, float internally).
+2) Core Metrics:
+   - LUFS integrated + short-term (EBU R128)
+   - True peak + sample peak
+   - Crest factor / DR proxy
+   - Noise floor estimation (voice-aware where relevant)
+   - Spectral balance curve and comparison vs genre profiles
+   - Stereo correlation and mono-compat
+3) Vocal-specific detectors:
+   - Sibilance detection (energy concentration in sibilant bands)
+   - Plosive detection (low-frequency bursts)
+   - Resonance candidates (narrowband peaks)
+   - Roominess / early reflections proxy
+4) BPM/Key estimation:
+   - BPM detection + confidence
+   - Key detection + confidence
+5) A/B mastering module (mix mode only):
+   - Compare user mix vs reference track on key metrics
+   - Generate delta-based recommendations
+6) Report generator:
+   - JSON result schema + human-readable report
+   - Action list prioritized by impact (recording fixes first, then mix fixes)
+   - Explain “why” with measured evidence
+
+7) Masking & Conflict Analysis (Instrumental + Mix)
+   - Identify frequency regions where vocal fundamentals/presence are masked by instruments
+   - Identify kick/bass overlap zones and recommend separation strategies
+   - Output: “Top 3 masking conflicts” with frequency ranges and likely sources
+
+8) Low-End Translation & Sub Mono Safety (Instrumental + Mix)
+   - Measure sub energy distribution and side-energy below ~120 Hz
+   - Flag “wide sub” and phase risks
+   - Output: low-end translation score + mono-sub recommendations
+
+9) Transient/Punch & Limiter Vulnerability (Instrumental + Mix)
+   - Transient spikiness, punch index, density
+   - Predict limiter pumping risk
+   - Output: punch score + limiter vulnerability score + suggestions
+
+10) Reverb/Delay Depth & Placement (Vocal + Mix)
+   - Estimate reverb tail length / depth proxy and vocal forwardness
+   - Flag “vocal too far back” and propose corrective actions
+
+11) Advanced Sibilance/Harshness Band Targeting (Vocal + Mix)
+   - Provide candidate frequency bands for de-essing and harshness control with severity
+   - Output: suggested band ranges (e.g. 5–7k / 7–10k) and priority
+
+12) Artifact Detection (All modes)
+   - Detect gating artifacts, NR warble/chirp, crackle, codec artifacts (mp3)
+   - Output: artifact flags + severity + suggested fixes
+
+13) Audio QA Checks (All modes)
+   - DC offset detection, channel imbalance, sample rate / encoding issues
+   - Output: QA warnings and recommended re-export settings
+
+GENRE PROFILES (VERSION 2)
+Create an editable configuration file (YAML/JSON) that supports:
+- target LUFS ranges (per mode)
+- typical spectral tilt range
+- typical stereo width expectations
+- dynamic range / crest factor expectation
+- priority weights (e.g., rap vocal intelligibility vs sung vocal smoothness)
+- Include at least 12 profiles (e.g. Rap/Trap, Pop, R&B, EDM, House, Techno, Rock, Metal, Acoustic, Singer-Songwriter, Jazz, Lo-fi)
+- Also include sub-variants where useful (e.g., Rap: boombap vs trap; EDM: club vs chill)
+
+UI REQUIREMENTS
+- Clean UI with three tabs (Vocal / Instrumental / Mix)
+- Dropdowns for genre and vocal style
+- Upload component with progress
+- Optional “Reference Track” upload in Mix mode (A/B)
+- Results page with:
+  - summary + scores + prioritized fixes
+  - BPM/Key guesses (Instrumental/Mix)
+  - A/B comparison section (Mix mode)
+  - expandable “technical appendix”
+- Provide seeded demo mode (no upload) for testing.
+
+DELIVERABLES
+- Create full repo with README, Docker setup, environment variables, scripts.
+- Implement end-to-end flow.
+- Unit tests for core analysis functions + one integration test for a full job.
+- Clear JSON schema for analysis results.
+- Keep components replaceable (no vendor lock-in).
+
+IMPORTANT
+Do NOT hardcode the tech stack in prose unless justified by quality. If you choose hybrid, explain why.
+Hei (videresend denne til rektor for meg)
+
+Allways update this prompt, if:
+The Application changes to the better, or With New functions
+Loggin, log progress (what is done, how far have we made it, and what is the NeXT Natural step in the process)
+PROGRESS LOG
+- 2025-12-29: Created full FastAPI-based AudioMixMentor repo with async job queue, analysis engine (LUFS/true-peak/spectral/stereo, vocal and mix diagnostics, BPM/key, A/B compare), genre profiles, demo mode, static UI, Docker, README, and tests. Next step: install dependencies and run `uvicorn app.main:app --host 0.0.0.0 --port 5005`, then validate uploads and demo mode on http://localhost:5005.
+- 2025-12-29: Updated dependencies for Python 3.14 compatibility and migrated settings to pydantic-settings. Server now starts cleanly on port 5005. Next step: open http://localhost:5005 and run Demo Mode or upload a real file.

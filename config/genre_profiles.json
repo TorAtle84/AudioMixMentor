@@ -1,0 +1,121 @@
+{
+  "default": {
+    "modes": {
+      "vocal": {
+        "lufs_target": [-18, -14],
+        "spectral_tilt": [-1.6, -0.6],
+        "stereo_width": [0.0, 0.2],
+        "crest_factor": [10, 16]
+      },
+      "instrumental": {
+        "lufs_target": [-16, -10],
+        "spectral_tilt": [-1.4, -0.6],
+        "stereo_width": [0.2, 0.6],
+        "crest_factor": [8, 14]
+      },
+      "mix": {
+        "lufs_target": [-14, -9],
+        "spectral_tilt": [-1.2, -0.5],
+        "stereo_width": [0.2, 0.6],
+        "crest_factor": [7, 12]
+      }
+    },
+    "vocal_styles": {
+      "rap": {"lufs_target": [-17, -13]},
+      "singing": {"lufs_target": [-19, -15]},
+      "both": {"lufs_target": [-18, -14]}
+    }
+  },
+  "Rap/Trap": {
+    "modes": {
+      "vocal": {"lufs_target": [-16, -12], "spectral_tilt": [-1.2, -0.4], "stereo_width": [0.0, 0.2], "crest_factor": [9, 13]},
+      "instrumental": {"lufs_target": [-13, -9], "spectral_tilt": [-1.1, -0.4], "stereo_width": [0.25, 0.6], "crest_factor": [7, 11]},
+      "mix": {"lufs_target": [-10, -7], "spectral_tilt": [-1.0, -0.3], "stereo_width": [0.25, 0.6], "crest_factor": [6, 10]}
+    },
+    "vocal_styles": {
+      "rap": {"lufs_target": [-15, -11], "crest_factor": [8, 12]},
+      "singing": {"lufs_target": [-17, -13]},
+      "both": {"lufs_target": [-16, -12]}
+    }
+  },
+  "Rap - BoomBap": {
+    "modes": {
+      "vocal": {"lufs_target": [-17, -13], "spectral_tilt": [-1.3, -0.5], "stereo_width": [0.0, 0.2], "crest_factor": [10, 14]},
+      "mix": {"lufs_target": [-13, -9], "spectral_tilt": [-1.2, -0.5], "stereo_width": [0.2, 0.5], "crest_factor": [8, 12]}
+    }
+  },
+  "Rap - Trap": {
+    "modes": {
+      "vocal": {"lufs_target": [-15, -11], "spectral_tilt": [-1.1, -0.4], "stereo_width": [0.0, 0.2], "crest_factor": [8, 12]},
+      "mix": {"lufs_target": [-10, -7], "spectral_tilt": [-1.0, -0.3], "stereo_width": [0.3, 0.6], "crest_factor": [6, 10]}
+    }
+  },
+  "Pop": {
+    "modes": {
+      "vocal": {"lufs_target": [-18, -14], "spectral_tilt": [-1.4, -0.6], "stereo_width": [0.0, 0.2], "crest_factor": [10, 15]},
+      "mix": {"lufs_target": [-12, -8], "spectral_tilt": [-1.2, -0.4], "stereo_width": [0.25, 0.6], "crest_factor": [7, 11]}
+    }
+  },
+  "R&B": {
+    "modes": {
+      "vocal": {"lufs_target": [-19, -15], "spectral_tilt": [-1.5, -0.7], "stereo_width": [0.0, 0.2], "crest_factor": [11, 16]},
+      "mix": {"lufs_target": [-13, -9], "spectral_tilt": [-1.3, -0.5], "stereo_width": [0.25, 0.6], "crest_factor": [8, 12]}
+    }
+  },
+  "EDM": {
+    "modes": {
+      "instrumental": {"lufs_target": [-11, -7], "spectral_tilt": [-1.0, -0.2], "stereo_width": [0.35, 0.7], "crest_factor": [5, 9]},
+      "mix": {"lufs_target": [-9, -6], "spectral_tilt": [-0.9, -0.2], "stereo_width": [0.4, 0.7], "crest_factor": [5, 8]}
+    }
+  },
+  "EDM - Club": {
+    "modes": {
+      "mix": {"lufs_target": [-8, -6], "spectral_tilt": [-0.8, -0.2], "stereo_width": [0.4, 0.7], "crest_factor": [5, 8]}
+    }
+  },
+  "EDM - Chill": {
+    "modes": {
+      "mix": {"lufs_target": [-12, -9], "spectral_tilt": [-1.1, -0.4], "stereo_width": [0.35, 0.6], "crest_factor": [6, 10]}
+    }
+  },
+  "House": {
+    "modes": {
+      "mix": {"lufs_target": [-9, -7], "spectral_tilt": [-0.9, -0.3], "stereo_width": [0.35, 0.65], "crest_factor": [6, 9]}
+    }
+  },
+  "Techno": {
+    "modes": {
+      "mix": {"lufs_target": [-9, -6], "spectral_tilt": [-0.8, -0.2], "stereo_width": [0.3, 0.6], "crest_factor": [5, 9]}
+    }
+  },
+  "Rock": {
+    "modes": {
+      "mix": {"lufs_target": [-12, -9], "spectral_tilt": [-1.3, -0.5], "stereo_width": [0.2, 0.5], "crest_factor": [7, 12]}
+    }
+  },
+  "Metal": {
+    "modes": {
+      "mix": {"lufs_target": [-10, -8], "spectral_tilt": [-1.1, -0.4], "stereo_width": [0.2, 0.5], "crest_factor": [6, 10]}
+    }
+  },
+  "Acoustic": {
+    "modes": {
+      "mix": {"lufs_target": [-16, -12], "spectral_tilt": [-1.6, -0.8], "stereo_width": [0.15, 0.4], "crest_factor": [10, 16]}
+    }
+  },
+  "Singer-Songwriter": {
+    "modes": {
+      "mix": {"lufs_target": [-16, -12], "spectral_tilt": [-1.5, -0.7], "stereo_width": [0.15, 0.4], "crest_factor": [10, 16]}
+    }
+  },
+  "Jazz": {
+    "modes": {
+      "mix": {"lufs_target": [-18, -14], "spectral_tilt": [-1.7, -0.9], "stereo_width": [0.2, 0.5], "crest_factor": [11, 18]}
+    }
+  },
+  "Lo-fi": {
+    "modes": {
+      "mix": {"lufs_target": [-14, -10], "spectral_tilt": [-1.3, -0.6], "stereo_width": [0.2, 0.5], "crest_factor": [7, 12]}
+    }
+  }
+}

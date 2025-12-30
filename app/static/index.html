@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AudioMixMentor</title>
+  <link rel="stylesheet" href="/static/styles.css" />
+</head>
+<body>
+  <div class="orb orb--one"></div>
+  <div class="orb orb--two"></div>
+  <div class="orb orb--three"></div>
+
+  <header class="site-header">
+    <div class="brand">
+      <span class="brand__mark">AM</span>
+      <div>
+        <h1>AudioMixMentor</h1>
+        <p>Senior mix engineer feedback, automated.</p>
+      </div>
+    </div>
+    <div class="status" id="statusLine">Ready for analysis.</div>
+  </header>
+
+  <main class="layout">
+    <section class="panel" aria-labelledby="analyzer-title">
+      <div class="panel__head">
+        <h2 id="analyzer-title">Analyser ditt spor</h2>
+        <p>Last opp lyd for dyp miks-tilbakemelding og mastering-klare målinger.</p>
+      </div>
+
+      <div class="tabs" role="tablist">
+        <button class="tab is-active" data-mode="vocal" role="tab">Vokal</button>
+        <button class="tab" data-mode="instrumental" role="tab">Instrumental</button>
+        <button class="tab" data-mode="mix" role="tab">Miks</button>
+      </div>
+
+      <div class="grid">
+        <label class="field">
+          <span>Sjanger</span>
+          <select id="genreSelect"></select>
+        </label>
+
+        <label class="field" id="vocalStyleField">
+          <span>Vokalstil</span>
+          <select id="vocalStyleSelect">
+            <option value="rap">Rap</option>
+            <option value="singing">Sang</option>
+            <option value="both">Begge</option>
+          </select>
+        </label>
+      </div>
+
+      <div class="upload">
+        <div>
+          <label class="file">
+            <span>Hovedlydspor (wav, aiff, flac, mp3)</span>
+            <input id="audioFile" type="file" accept="audio/*" />
+          </label>
+          <p class="hint">MP3 godtas med kvalitetsadvarsel.</p>
+        </div>
+        <div id="referenceBlock" class="hidden">
+          <label class="file">
+            <span>Referansespor (valgfritt)</span>
+            <input id="referenceFile" type="file" accept="audio/*" />
+          </label>
+          <p class="hint">Brukes for A/B-masteringssammenligning.</p>
+        </div>
+      </div>
+
+      <div class="actions">
+        <button class="btn" id="runBtn">Kjør analyse</button>
+        <button class="btn btn--ghost" id="demoBtn">Kjør demomodus</button>
+      </div>
+
+      <div class="progress" id="progressWrap">
+        <div class="progress__bar" id="progressBar"></div>
+        <span class="progress__label" id="progressLabel">Klar</span>
+      </div>
+    </section>
+
+    <section class="panel panel--results" aria-live="polite">
+      <div class="panel__head">
+        <h2>Resultater</h2>
+        <p>Sammendrag, score, forbedringer og teknisk vedlegg.</p>
+      </div>
+
+      <div class="results" id="results">
+        <div class="empty">Kjør en analyse for å se resultater.</div>
+      </div>
+    </section>
+  </main>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>
