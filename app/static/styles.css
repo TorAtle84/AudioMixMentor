@@ -84,6 +84,13 @@ body {
   letter-spacing: 0.1em;
 }
 
+.brand__logo {
+  width: 54px;
+  height: 54px;
+  border-radius: 16px;
+  object-fit: cover;
+}
+
 .brand h1 {
   margin: 0;
   font-size: 1.9rem;
